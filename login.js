@@ -2,14 +2,14 @@ import supaBase from "./configration.js";
 
 let lEmail = document.getElementById("email");
 let lPass = document.getElementById("password");
-let lBtn = document.querySelector(".btn-primary");
+let lBtn = document.querySelector("#login-btn");
 
 
 //  pasword toggle button
 
 const togglePass = document.querySelector(".toggle-password")
-
-togglePass.addEventListener("click", () => {
+  function toggleIcon(){
+ 
     if (lPass.type === "password") {
         lPass.type = "text"
         togglePass.classList.remove("fa-eye-slash")
@@ -19,12 +19,14 @@ togglePass.addEventListener("click", () => {
         togglePass.classList.remove("fa-eye")
         togglePass.classList.add("fa-eye-slash")
     }
-})
+}
+
+ togglePass &&togglePass.addEventListener("click", toggleIcon)
 
 
 async function login(e) {
     e.preventDefault();
-
+   
     let email = lEmail.value.trim();
     let pass = lPass.value.trim();
 
@@ -223,3 +225,53 @@ async function login(e) {
 
 
 lBtn && lBtn.addEventListener("click", login);
+
+
+
+                        //    FORGET PASSWORD FUNCINALITY
+
+
+const resetBtn = document.getElementById("resetBtn");
+ const resEmail = document.getElementById("reset-email");
+
+
+async function reset(){
+
+    if (!resEmail.value) {
+        alert("Please enter an email");
+       return
+    }
+   
+  
+    const { data, error } = await supaBase.auth.resetPasswordForEmail(resEmail.value, {
+        redirectTo: "https://azkaazeem.github.io/Login-page---Update-Password-page" 
+      
+    });
+
+    if (error) {
+        alert("Error: " + error.message);
+    } else {
+        alert("Reset link sent to your email!");
+    }
+};
+
+resetBtn && resetBtn.addEventListener("click", reset)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

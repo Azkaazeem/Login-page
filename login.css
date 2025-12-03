@@ -92,13 +92,14 @@ h1 {
 
 .check-remember{
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
     margin-bottom: 25px;
     font-size: 14px;
+    /* text-align: right; */
 }
 
-#checkbox {
+/* #checkbox {
     display: flex;
     align-items: center;
 }
@@ -108,7 +109,7 @@ h1 {
     accent-color: #003b46;
     width: 16px;
     height: 16px;
-}
+} */
 
 #forgot-pass {
     color: #003b46;
@@ -261,6 +262,59 @@ h1 {
     right: 25%;
 }
 
+/* ================== FORGET PASSWORD ==================== */
+
+.forgot-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f6f7;
+}
+
+.forgot-box {
+    width: 100%;
+    max-width: 380px;
+    background: white;
+    padding: 35px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+    text-align: center;
+    animation: slideDown 1s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-80px) scale(1.06);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.forgot-box h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+}
+
+.forgot-box .sub {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.back-login {
+    display: block;
+    margin-top: 18px;
+    font-size: 14px;
+    color: #003b46;
+    text-decoration: none;
+}
 
 /* ================= Responsive Adjustments ================= */
 
