@@ -261,60 +261,7 @@ h1 {
     top: 30%;
     right: 25%;
 }
-
-/* ================== FORGET PASSWORD ==================== */
-
-.forgot-container {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f5f6f7;
-}
-
-.forgot-box {
-    width: 100%;
-    max-width: 380px;
-    background: white;
-    padding: 35px 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 25px rgba(0,0,0,0.08);
-    text-align: center;
-    animation: slideDown 1s ease-out forwards;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-80px) scale(1.06);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.forgot-box h2 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #1a1a1a;
-    margin-bottom: 5px;
-}
-
-.forgot-box .sub {
-    font-size: 13px;
-    color: #555;
-    margin-bottom: 25px;
-}
-
-.back-login {
-    display: block;
-    margin-top: 18px;
-    font-size: 14px;
-    color: #003b46;
-    text-decoration: none;
-}
+           
 
 /* ================= Responsive Adjustments ================= */
 
@@ -415,4 +362,187 @@ h1 {
 .glass-alert {
   backdrop-filter: blur(12px);
   border-radius: 20px;
+}
+
+
+
+/* ================== FORGET PASSWORD ==================== */
+
+.forgot-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f6f7;
+}
+
+.forgot-box {
+    width: 100%;
+    max-width: 380px;
+    background: white;
+    padding: 35px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+    text-align: center;
+    animation: slideDown 1s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-80px) scale(1.06);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.forgot-box h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+}
+
+.forgot-box .sub {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.back-login {
+    display: block;
+    margin-top: 18px;
+    font-size: 14px;
+    color: #003b46;
+    text-decoration: none;
+}
+
+
+       /* ================== UPDATE PASSWORD ======================= */
+
+
+       /* ------- SAME FAMILY STYLING LIKE FORGET PAGE -------- */
+
+.update-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #f4f7f8, #eef2f3);
+}
+
+.update-box {
+    width: 100%;
+    max-width: 380px;
+    background: #ffffff;
+    padding: 40px 42px;
+    border-radius: 14px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    animation: slideDown 0.9s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-80px) scale(1.06);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+.update-box h2 {
+    font-size: 25px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+}
+
+.update-box p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 28px;
+}
+
+.input-grp {
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+.input-grp label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 7px;
+    display: block;
+}
+
+.password-input {
+    position: relative;
+}
+
+.password-input input {
+    width: 100%;
+    padding: 15px 18px;
+    background: #f7f9fa;
+    border: 1px solid #e2e5e7;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all .3s ease;
+}
+
+.password-input input:focus {
+    border-color: #003b46;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(0, 59, 70, 0.10);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+/* BUTTON */
+.btn-primary {
+    width: 100%;
+    padding: 13px;
+    background: #003b46 !important;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #022e36 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(0, 59, 70, 0.30);
+}
+
+/* LINK */
+.back-login {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #003b46;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.back-login:hover {
+    color: #022e36;
+    text-decoration: underline;
 }

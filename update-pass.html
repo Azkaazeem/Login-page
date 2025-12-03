@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Password | Made By Azka Azeem 💙</title>
+
+    <!-- BOOTSTRAP LINK -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link  href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="shortcut icon" href="imgs/01- LOGO.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="login.css">
+
+   
+</head>
+
+<body>
+
+    <div class="update-container">
+
+        <div class="update-box">
+
+            <h2>Update Password</h2>
+            <p>Enter your new password</p>
+
+            <div class="input-grp password-grp">
+                <label for="password">New Password</label>
+                <div class="password-input">
+                    <input type="password" id="newPass" placeholder="Enter new password">
+                    <i class="fa-solid fa-eye-slash toggle-password" data-target="newPass"></i>
+                </div>
+            </div>
+
+            <div class="input-grp password-grp">
+                <label for="password">Confirm Password</label>
+                <div class="password-input">
+                    <input type="password" id="confirmPass" placeholder="Enter new password">
+                    <i class="fa-solid fa-eye-slash toggle-password" data-target="confirmPass"></i>
+                </div>
+            </div>
+
+            <button class="btn-primary" id="updatePassBtn">Update Password</button>
+           
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="configration.js"></script>
+     <script type="module" src="login.js"></script>
+
+
+</body>
+
+</html>
