@@ -8,8 +8,9 @@ let lBtn = document.querySelector("#login-btn");
 //  pasword toggle button
 
 const togglePass = document.querySelector(".toggle-password")
+
   function toggleIcon(){
- 
+ if (!lPass) return;
     if (lPass.type === "password") {
         lPass.type = "text"
         togglePass.classList.remove("fa-eye-slash")
@@ -269,97 +270,155 @@ let newPassInp = document.getElementById("newPass");
 let conPassInp = document.getElementById("confirmPass");
 let ubdBtn = document.getElementById("updatePassBtn");
 
-async function newPass() {
+
+async function newPass(e) {
+    e.preventDefault();
+
+    console.log("Button is clicked!!!!");
+
+    if (!newPassInp.value && !conPassInp.value) {
+        console.log("Input is Empty!!");
+        Swal.fire({
+            title: "Password fields required!",
+            text: "Please enter New password and Confirm password.",
+            icon: "warning",
+            background: "#f9fbfc",
+            color: "#003b46",
+            confirmButtonColor: "#003b46",
+            confirmButtonText: "OK",
+            padding: "20px",
+            borderRadius: "15px",
+            customClass: {
+                popup: "glass-alert"
+            }
+        })
+
+        return;
+    }
+
+    if (newPassInp.value !== conPassInp.value) {
+
+        console.log("Passwords are not equal!!");
+
+        Swal.fire({
+            title: "Password Do Not Match",
+            text: "The New Password and Confirm Password fields must be identical..",
+            icon: "warning",
+            background: "#f9fbfc",
+            color: "#003b46",
+            confirmButtonColor: "#003b46",
+            confirmButtonText: "OK",
+            padding: "20px",
+            borderRadius: "15px",
+            customClass: {
+                popup: "glass-alert"
+            }
+        })
+
+        return;
+    }
+
+
 try {
-    
 
-
-    const { data, error } = await supaBase.auth.updateU
-    
-    
-    ser({
+    const { data, error } = await supaBase.auth.updateUser({
         password: newPassInp.value
     });
 
     if (error) {
-    console.log(error.message);
-    
-    }else{
+        console.log(error.message);
         Swal.fire({
-                title: 'Success!',
-                text: 'Your password has been updated successfully. Redirecting to login...',
-                icon: 'success',
-                timer: 3000,
-                showConfirmButton: false
-            }).then(() => {
-                // User ko login page par bhej dein
-                location.href = 'https://azkaazeem.github.io/Login-page/'; // Isay apne login page ka URL dein
-            });
-    } 
+            title: "Updation Failed!",
+            text: error.message,
+            icon: "error",
+            draggable: true,
+            background: "#f9fbfc",
+            color: "#003b46",
+            confirmButtonColor: "#003b46",
+            confirmButtonText: "OK",
+            padding: "20px",
+            borderRadius: "15px",
+            customClass: {
+                popup: "glass-alert"
+            }
+        }).then(() => {
+            newPassInp.value = "";
+            conPassInp.value = "";
+        })
 
-} catch (error) {
-    
+
+    } else {
+        Swal.fire({
+            title: "Success!",
+            text: "Your password has been updated successfully. Redirecting to login.",
+            icon: "success",
+            draggable: true,
+            timer: 3000,
+            showConfirmButton: false,
+            background: "#f9fbfc",
+            color: "#003b46",
+            padding: "20px",
+            borderRadius: "15px",
+            customClass: {
+                popup: "glass-alert"
+            }
+
+        })
+            .then(() => {
+                location.href = 'https://azkaazeem.github.io/Login-page/';
+            });
+    }
+
+} catch (err) {
+    console.log(err)
+    Swal.fire({
+        title: "System error!",
+        html: `Something went wrong internally! <br></br> <b>${err.message || "Unknown error"}</b>`,
+        icon: "error",
+        background: "#f9fbfc",
+        color: "#003b46",
+        confirmButtonColor: "#003b46",
+        confirmButtonText: "Report issue",
+        padding: "20px",
+        borderRadius: "15px",
+        customClass: {
+            popup: "glass-alert"
+        }
+    }).then(() => {
+            newPassInp.value = "";
+            conPassInp.value = "";
+
+    })
+}
 }
 
-
-} 
-
-ubdBtn.addEventListener ("click", newPass)
-
-
-
-
-
-
-
-
-
+ubdBtn.addEventListener("click", newPass)
 
 
 // SHOW/HIDE PASSWORD TOGGLE
 
+let toggles = document.querySelectorAll(".toggle-password");
+
+toggles.forEach(toggle => {
+
+    function toggIcon() {
+        let id = toggle.getAttribute("data-target");
+        let input = document.getElementById(id);
+
+        if (input.type === "password") {
+            input.type = "text";
+            toggle.classList.replace("fa-eye-slash", "fa-eye");
+        } else {
+            input.type = "password";
+            toggle.classList.replace("fa-eye", "fa-eye-slash");
+        }
+
+        console.log("Cutie Eye Icon is clicked!!!!");
 
 
-// let toggles = document.querySelectorAll(".toggle-password");
+    }
 
-// toggles.forEach(toggle => {
-//     function toggIcon() {
-//         let id = toggle.getAttribute("data-target");
-//         let input = document.getElementById(id);
+    toggle && toggle.addEventListener("click", toggIcon)
+}
 
-//         if (input.type === "password") {
-//             input.type = "text";
-//             toggle.classList.replace("fa-eye-slash", "fa-eye");
-//         } else {
-//             input.type = "password";
-//             toggle.classList.replace("fa-eye", "fa-eye-slash");
-//         }
-
-//     }
-
-//     toggle && toggle.addEventListener("click", toggIcon)
-// }
-
-// )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+)
