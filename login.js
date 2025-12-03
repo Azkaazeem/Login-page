@@ -5,12 +5,12 @@ let lPass = document.getElementById("password");
 let lBtn = document.querySelector("#login-btn");
 
 
-//  pasword toggle button
+            //  pasword toggle button for login and forget password page
 
 const togglePass = document.querySelector(".toggle-password")
 
-  function toggleIcon(){
- if (!lPass) return;
+function toggleIcon() {
+    if (!lPass) return;
     if (lPass.type === "password") {
         lPass.type = "text"
         togglePass.classList.remove("fa-eye-slash")
@@ -22,12 +22,16 @@ const togglePass = document.querySelector(".toggle-password")
     }
 }
 
- togglePass &&togglePass.addEventListener("click", toggleIcon)
+togglePass && togglePass.addEventListener("click", toggleIcon)
+
+             
+
+                //   LOGIN FUNCTIONALTY
 
 
 async function login(e) {
     e.preventDefault();
-   
+
     let email = lEmail.value.trim();
     let pass = lPass.value.trim();
 
@@ -217,7 +221,7 @@ async function login(e) {
             customClass: {
                 popup: "glass-alert"
             }
-        }).then ( () => {
+        }).then(() => {
             lEmail.value = "";
             lPass.value = "";
         })
@@ -229,32 +233,105 @@ lBtn && lBtn.addEventListener("click", login);
 
 
 
-                        //    FORGET PASSWORD FUNCINALITY
+                       //    FORGET PASSWORD FUNCINALITY
 
 
 const resetBtn = document.getElementById("resetBtn");
- const resEmail = document.getElementById("reset-email");
+const resEmail = document.getElementById("reset-email");
 
 
-async function reset(){
-
+async function reset(e) {
+    e.preventDefault ();
+    
     if (!resEmail.value) {
-        alert("Please enter an email");
-       return
+        console.log("Input is Empty!!");
+        Swal.fire({
+            title: "Email required!",
+            text: "Please Enter your Email.",
+            icon: "warning",
+            background: "#f9fbfc",
+            color: "#003b46",
+            confirmButtonColor: "#003b46",
+            confirmButtonText: "OK",
+            padding: "20px",
+            borderRadius: "15px",
+            customClass: {
+                popup: "glass-alert"
+            }
+        })
+        return;
     }
-   
-  
+
+try {
+    
+
     const { data, error } = await supaBase.auth.resetPasswordForEmail(resEmail.value, {
-        redirectTo: "https://azkaazeem.github.io/Login-page---Update-Password-page" 
-      
+        redirectTo: "https://azkaazeem.github.io/Login-page---Update-Password-page"
+
     });
 
-    if (error) {
-        alert("Error: " + error.message);
-    } else {
-        alert("Reset link sent to your email!");
+if (error) {
+            console.log('Supabase Error:' + ' ' + error.message);
+            Swal.fire({
+                title: "Error!",
+                text: error.message,
+                icon: "error",
+                draggable: true,
+                background: "#f9fbfc",
+                color: "#003b46",
+                confirmButtonColor: "#003b46",
+                confirmButtonText: "OK",
+                padding: "20px",
+                borderRadius: "15px",
+                customClass: {
+                    popup: "glass-alert"
+                }
+            }).then(() => {
+            resEmail.value = "";
+            })
+
+
+        } else {
+            console.log ('Reset link sent to you Email..')
+            Swal.fire({
+                title: "Success!",
+                text: "Reset link sent to you Email..",
+                icon: "success",
+                draggable: true,
+                timer: 3000,
+                showConfirmButton: false,
+                background: "#f9fbfc",
+                color: "#003b46",
+                padding: "20px",
+                borderRadius: "15px",
+                customClass: {
+                    popup: "glass-alert"
+                }
+
+            })
+        }
+
+    } catch (err) {
+        console.log(err)
+        Swal.fire({
+            title: "System error!",
+            html: `Something went wrong internally! <br></br> <b>${err.message || "Unknown error"}</b>`,
+            icon: "error",
+            background: "#f9fbfc",
+            color: "#003b46",
+            confirmButtonColor: "#003b46",
+            confirmButtonText: "Report issue",
+            padding: "20px",
+            borderRadius: "15px",
+            customClass: {
+                popup: "glass-alert"
+            }
+        }).then(() => {
+            resEmail.value = "";
+            })
     }
-};
+}
+
 
 resetBtn && resetBtn.addEventListener("click", reset)
 
@@ -264,7 +341,7 @@ resetBtn && resetBtn.addEventListener("click", reset)
 
 
 
-// ADD UPDATE PASSWORD FUNCTIONALITY
+//      UPDATE PASSWORD FUNCTIONALITY
 
 let newPassInp = document.getElementById("newPass");
 let conPassInp = document.getElementById("confirmPass");
@@ -280,7 +357,7 @@ async function newPass(e) {
         console.log("Input is Empty!!");
         Swal.fire({
             title: "Password fields required!",
-            text: "Please enter New password and Confirm password.",
+            text: "Please Enter New password and Confirm password.",
             icon: "warning",
             background: "#f9fbfc",
             color: "#003b46",
@@ -319,23 +396,66 @@ async function newPass(e) {
     }
 
 
-try {
+    try {
 
-    const { data, error } = await supaBase.auth.updateUser({
-        password: newPassInp.value
-    });
+        const { data, error } = await supaBase.auth.updateUser({
+            password: newPassInp.value
+        });
 
-    if (error) {
-        console.log(error.message);
+        if (error) {
+            console.log(error.message);
+            Swal.fire({
+                title: "Updation Failed!",
+                text: error.message,
+                icon: "error",
+                draggable: true,
+                background: "#f9fbfc",
+                color: "#003b46",
+                confirmButtonColor: "#003b46",
+                confirmButtonText: "OK",
+                padding: "20px",
+                borderRadius: "15px",
+                customClass: {
+                    popup: "glass-alert"
+                }
+            }).then(() => {
+                newPassInp.value = "";
+                conPassInp.value = "";
+            })
+
+
+        } else {
+            Swal.fire({
+                title: "Success!",
+                text: "Your password has been updated successfully. Redirecting to login.",
+                icon: "success",
+                draggable: true,
+                timer: 3000,
+                showConfirmButton: false,
+                background: "#f9fbfc",
+                color: "#003b46",
+                padding: "20px",
+                borderRadius: "15px",
+                customClass: {
+                    popup: "glass-alert"
+                }
+
+            })
+                .then(() => {
+                    location.href = 'https://azkaazeem.github.io/Login-page/';
+                });
+        }
+
+    } catch (err) {
+        console.log(err)
         Swal.fire({
-            title: "Updation Failed!",
-            text: error.message,
+            title: "System error!",
+            html: `Something went wrong internally! <br></br> <b>${err.message || "Unknown error"}</b>`,
             icon: "error",
-            draggable: true,
             background: "#f9fbfc",
             color: "#003b46",
             confirmButtonColor: "#003b46",
-            confirmButtonText: "OK",
+            confirmButtonText: "Report issue",
             padding: "20px",
             borderRadius: "15px",
             customClass: {
@@ -344,58 +464,15 @@ try {
         }).then(() => {
             newPassInp.value = "";
             conPassInp.value = "";
-        })
-
-
-    } else {
-        Swal.fire({
-            title: "Success!",
-            text: "Your password has been updated successfully. Redirecting to login.",
-            icon: "success",
-            draggable: true,
-            timer: 3000,
-            showConfirmButton: false,
-            background: "#f9fbfc",
-            color: "#003b46",
-            padding: "20px",
-            borderRadius: "15px",
-            customClass: {
-                popup: "glass-alert"
-            }
 
         })
-            .then(() => {
-                location.href = 'https://azkaazeem.github.io/Login-page/';
-            });
     }
-
-} catch (err) {
-    console.log(err)
-    Swal.fire({
-        title: "System error!",
-        html: `Something went wrong internally! <br></br> <b>${err.message || "Unknown error"}</b>`,
-        icon: "error",
-        background: "#f9fbfc",
-        color: "#003b46",
-        confirmButtonColor: "#003b46",
-        confirmButtonText: "Report issue",
-        padding: "20px",
-        borderRadius: "15px",
-        customClass: {
-            popup: "glass-alert"
-        }
-    }).then(() => {
-            newPassInp.value = "";
-            conPassInp.value = "";
-
-    })
-}
 }
 
-ubdBtn.addEventListener("click", newPass)
+ubdBtn && ubdBtn.addEventListener("click", newPass)
 
 
-// SHOW/HIDE PASSWORD TOGGLE
+// SHOW/HIDE PASSWORD TOGGLE  for update password
 
 let toggles = document.querySelectorAll(".toggle-password");
 
